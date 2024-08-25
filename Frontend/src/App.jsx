@@ -1,0 +1,83 @@
+import React, { useState } from 'react';
+import axios from 'axios';
+import './App.css';  // Import the CSS file for styling
+
+function App() {
+  const [jsonInput, setJsonInput] = useState('');
+  const [response, setResponse] = useState(null);
+  const [filter, setFilter] = useState([]);
+  const [error, setError] = useState('');
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const parsedInput = JSON.parse(jsonInput);
+      if (!parsedInput.data) throw new Error('Invalid JSON format');
+      
+      const res = await axios.post('http://localhost:3000/bfhl', parsedInput); // Update with your deployed backend URL
+      setResponse(res.data);
+      setError('');
+    } catch (err) {
+      setError(err.message);
+    }
+  };
+
+  const handleFilterChange = (e) => {
+    const value = e.target.value;
+    setFilter(
+      filter.includes(value) ? filter.filter((item) => item !== value) : [...filter, value]
+    );
+  };
+
+  const renderResponse = () => {
+    if (!response) return null;
+
+    const { numbers, alphabets, highest_lowercase_alphabet } = response;
+    const filteredResponse = {};
+    if (filter.includes('Numbers')) filteredResponse.numbers = numbers;
+    if (filter.includes('Alphabets')) filteredResponse.alphabets = alphabets;
+    if (filter.includes('Highest lowercase alphabet')) filteredResponse.highest_lowercase_alphabet = highest_lowercase_alphabet;
+
+    return (
+      
+      <div className="filtered-response">
+        <h3>Filtered Response</h3>
+        <pre>{JSON.stringify(filteredResponse, null, 2)}</pre>
+      </div>
+    );
+  };
+
+  return (
+    <div className="app-container">
+      <h1>{response?.roll_number || 'BFHL Challenge'}</h1>
+      <form onSubmit={handleSubmit}>
+        <div className="form-group">
+          <label htmlFor="json-input">API Input</label>
+          <textarea
+            id="json-input"
+            rows="4"
+            value={jsonInput}
+            onChange={(e) => setJsonInput(e.target.value)}
+          />
+        </div>
+        <button type="submit" className="submit-btn">Submit</button>
+      </form>
+      {error && <p className="error-message">{error}</p>}
+
+      {response && (
+        <div className="filter-section">
+          <label htmlFor="multi-filter">Multi Filter</label>
+          <select id="multi-filter" multiple onChange={handleFilterChange}>
+            <option value="Numbers">Numbers</option>
+            <option value="Alphabets">Alphabets</option>
+            <option value="Highest lowercase alphabet">Highest lowercase alphabet</option>
+          </select>
+        </div>
+      )}
+
+      {renderResponse()}
+    </div>
+  );
+}
+
+export default App;
