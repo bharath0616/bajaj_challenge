@@ -6,8 +6,6 @@ const app = express();
 app.use(bodyParser.json());
 app.use(cors());
 
-const PORT = process.env.PORT || 3000;
-
 // POST /bfhl
 app.post('/bfhl', (req, res) => {
     const { data } = req.body;
@@ -39,6 +37,4 @@ app.get('/bfhl', (req, res) => {
   res.json({ operation_code: 1 });
 });
 
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
-});
+module.exports = app;
