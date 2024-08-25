@@ -1,3 +1,4 @@
+
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
@@ -9,28 +10,25 @@ app.use(cors());
 // POST /bfhl
 app.post('/bfhl', (req, res) => {
     const { data } = req.body;
-    if (!Array.isArray(data)) {
-        return res.status(400).json({ is_success: false, error: 'Invalid input' });
-    }
-
+    const user_id = "21BBS0166"; // replace with dynamic values if needed
+    const email = "mudduluru.bharath2021@vitstudent.ac.in";
+    const roll_number = "21BBS0166";
+  
     const numbers = data.filter(item => !isNaN(item));
     const alphabets = data.filter(item => isNaN(item));
-    const lowercaseAlphabets = alphabets.filter(item => item === item.toLowerCase());
-
-    const highestLowercaseAlphabet = lowercaseAlphabets.length
-        ? [lowercaseAlphabets.sort().reverse()[0]]
-        : [];
-
+    const lowercaseAlphabets = alphabets.filter(item => item >= 'a' && item <= 'z');
+    const highest_lowercase_alphabet = lowercaseAlphabets.length > 0 ? [lowercaseAlphabets.sort().pop()] : [];
+  
     res.json({
-        is_success: true,
-        user_id: 'john_doe_17091999',
-        email: 'john@xyz.com',
-        roll_number: 'ABCD123',
-        numbers,
-        alphabets,
-        highest_lowercase_alphabet: highestLowercaseAlphabet
+      is_success: true,
+      user_id,
+      email,
+      roll_number,
+      numbers,
+      alphabets,
+      highest_lowercase_alphabet
     });
-});
+  });
 
 // GET /bfhl
 app.get('/bfhl', (req, res) => {
