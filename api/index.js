@@ -10,7 +10,7 @@ app.use(cors());
 // POST /bfhl
 app.post('/bfhl', (req, res) => {
     const { data } = req.body;
-    const user_id = "21BBS0166"; // replace with dynamic values if needed
+    const user_id = "21BBS0166";
     const email = "mudduluru.bharath2021@vitstudent.ac.in";
     const roll_number = "21BBS0166";
   
@@ -35,6 +35,3 @@ app.get('/bfhl', (req, res) => {
   res.json({ operation_code: 1 });
 });
 
-app.use("/bfhl",(req,res)=>{
-    res.send("Server is running");
-})
