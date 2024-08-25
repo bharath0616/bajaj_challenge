@@ -56,6 +56,7 @@ function App() {
   };
 
   return (
+    <div className='main'>
     <div className="app-container">
       <h1>{response?.roll_number || 'BFHL Challenge'}</h1>
       <form onSubmit={handleSubmit}>
@@ -84,6 +85,7 @@ function App() {
       )}
 
       {renderResponse()}
+    </div>
     </div>
   );
 }
