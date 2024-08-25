@@ -35,4 +35,6 @@ app.get('/bfhl', (req, res) => {
   res.json({ operation_code: 1 });
 });
 
-module.exports = app;
+app.use("/bfhl",(req,res)=>{
+    res.send("Server is running");
+})
