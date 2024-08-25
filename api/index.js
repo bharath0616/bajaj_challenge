@@ -5,7 +5,12 @@ const cors = require('cors');
 
 const app = express();
 app.use(bodyParser.json());
-app.use(cors());
+app.use(cors({
+    origin: 'https://21bbs0166frontend-iwa1rexaw-bharath0616s-projects.vercel.app', // Your frontend URL
+    methods: 'GET,POST', // Allowed methods
+    credentials: true, // Allow credentials like cookies, authorization headers, etc.
+    optionsSuccessStatus: 204
+}));
 app.get('/', (req, res) => {
     res.send('Welcome to the BFHL API');
 });
