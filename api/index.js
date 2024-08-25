@@ -9,7 +9,9 @@ app.use(cors());
 app.get('/', (req, res) => {
     res.send('Welcome to the BFHL API');
 });
-
+app.get('/bfhl', (req, res) => {
+    res.json({ operation_code: 1 });
+  });
 // POST /bfhl
 app.post('/bfhl', (req, res) => {
     const { data } = req.body;
@@ -34,7 +36,5 @@ app.post('/bfhl', (req, res) => {
   });
 
 // GET /bfhl
-app.get('/bfhl', (req, res) => {
-  res.json({ operation_code: 1 });
-});
+
 
