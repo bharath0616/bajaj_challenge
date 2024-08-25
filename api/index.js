@@ -35,6 +35,6 @@ app.post('/bfhl', (req, res) => {
     });
   });
 
-// GET /bfhl
+  module.exports = app;
 
 
