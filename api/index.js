@@ -4,12 +4,9 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 
 const app = express();
+app.use(cors());
 app.use(bodyParser.json());
-app.options('*', cors({
-    origin: 'https://21bbs0166frontend-iwa1rexaw-bharath0616s-projects.vercel.app',
-    methods: 'GET,POST',
-    credentials: true
-}));
+
 
 app.get('/', (req, res) => {
     res.send('Welcome to the BFHL API');
@@ -39,7 +36,11 @@ app.post('/bfhl', (req, res) => {
       highest_lowercase_alphabet
     });
   });
-
+  app.listen(3000, () =>{
+    console.log('Server is running on port 3000')
+    
+}
+  )
   module.exports = app;
 
 
