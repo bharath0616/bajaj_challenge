@@ -14,7 +14,7 @@ function App() {
       const parsedInput = JSON.parse(jsonInput);
       if (!parsedInput.data) throw new Error('Invalid JSON format');
       
-      const res = await axios.post('http://localhost:3000/bfhl', parsedInput); // Update with your deployed backend URL
+      const res = await axios.post('https://21bbs0166backend-efgnz0fkq-bharath0616s-projects.vercel.app/bfhl', parsedInput); // Update with your deployed backend URL
       setResponse(res.data);
       setError('');
     } catch (err) {
@@ -33,16 +33,24 @@ function App() {
     if (!response) return null;
 
     const { numbers, alphabets, highest_lowercase_alphabet } = response;
-    const filteredResponse = {};
-    if (filter.includes('Numbers')) filteredResponse.numbers = numbers;
-    if (filter.includes('Alphabets')) filteredResponse.alphabets = alphabets;
-    if (filter.includes('Highest lowercase alphabet')) filteredResponse.highest_lowercase_alphabet = highest_lowercase_alphabet;
+    const filteredResponse = [];
+
+    if (filter.includes('Numbers') && numbers.length) {
+      filteredResponse.push(`Numbers: ${numbers.join(',')}`);
+    }
+    if (filter.includes('Alphabets') && alphabets.length) {
+      filteredResponse.push(`Alphabets: ${alphabets.join(',')}`);
+    }
+    if (filter.includes('Highest lowercase alphabet') && highest_lowercase_alphabet.length) {
+      filteredResponse.push(`Highest lowercase alphabet: ${highest_lowercase_alphabet.join(',')}`);
+    }
 
     return (
-      
       <div className="filtered-response">
         <h3>Filtered Response</h3>
-        <pre>{JSON.stringify(filteredResponse, null, 2)}</pre>
+        {filteredResponse.map((line, index) => (
+          <div key={index}>{line}</div>
+        ))}
       </div>
     );
   };
