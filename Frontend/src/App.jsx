@@ -14,7 +14,7 @@ function App() {
       const parsedInput = JSON.parse(jsonInput);
       if (!parsedInput.data) throw new Error('Invalid JSON format');
       
-      const res = await axios.post('https://21bbs0166backend-efgnz0fkq-bharath0616s-projects.vercel.app/bfhl', parsedData); // Update with your deployed backend URL
+      const res = await axios.post('https://21bbs0166backend-efgnz0fkq-bharath0616s-projects.vercel.app', parsedData); // Update with your deployed backend URL
       setResponse(res.data);
       setError('');
     } catch (err) {
