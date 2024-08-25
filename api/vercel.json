@@ -5,12 +5,6 @@
         "src": "index.js",
         "use": "@vercel/node"
       }
-    ],
-    "routes": [
-      {
-        "src": "/bfhl",
-        "dest": "index.js"
-      }
     ]
   }
   
