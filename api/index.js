@@ -1,12 +1,11 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
-const helmet = require('helmet');
+
 
 const app = express();
 app.use(cors());  // Consider restricting this to specific origins in production
 app.use(bodyParser.json());
-app.use(helmet());  // Adds security headers to the response
 
 app.get('/', (req, res) => {
     res.send('Welcome to the BFHL API');
